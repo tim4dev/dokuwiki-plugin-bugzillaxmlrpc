@@ -1,0 +1,7 @@
+name    bugzilla xml-rpc plugin
+desc    Gets information about bugs (with depends on) via XML-RPC Bugzilla::WebService
+author  Yuri Timofeev
+email   tim4dev@gmail.com
+date    2010-09-09
+url     http://www.dokuwiki.org/plugin:bugzillaxmlrpc
+syntax  bugz#12345
