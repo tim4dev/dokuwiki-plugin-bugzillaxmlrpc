@@ -209,20 +209,26 @@ class syntax_plugin_bugzillaxmlrpc extends DokuWiki_Syntax_Plugin {
                         $this->getLang('error_prefix').' : ' . $v['faultCode'] . ' - ' . $v['faultString'] .
                         '</i></div>';
                 } else {
+                    if ( ($v['bug_status'] == 'CLOSED') || ($v['bug_status'] == 'RESOLVED') ) {
+                        $s1 = '<s>';
+                        $s2 = '</s>';
+                    } else {
+                        $s1 = '';
+                        $s2 = '';
+                    }
+
                     $html_bug .= '<div class="li"><a href="' .
                         $this->getConf('url').$id. '" target="_blank" title="'.
                         $this->getLang('title').$id. '" class="interwiki iw_bug">'.
-                        $this->getLang('bug').' #' .$id. '</a><i> '. 
+                        $this->getLang('bug').' #' .$id. '</a>'.$s1.'<i> '. 
                         $v['product']. '</i> -> <b>'.$v['summary']. '</b>'.
                         ' ('. $this->getLang('opened').': '. $v['creation_ts'] .', '. 
                         $this->getLang('bug_status').': '. $v['bug_status'] .', '.
                         $this->getLang('deadline').': '. $v['deadline'].
-                        ') </div>';
+                        ') '.$s2.
+                        '</div>';
                 } 
-                if ( ($v['bug_status'] == 'CLOSED') || ($v['bug_status'] == 'RESOLVED') ) 
-                    $html_bug_all .= '<li><s>'. $html_bug . '</s></li>' . "\n";
-                else
-                    $html_bug_all .= '<li>'.$html_bug.'</li>' . "\n";
+                $html_bug_all .= '<li>'.$html_bug.'</li>' . "\n";
                 $i++;
             } // foreach
             if ( $i > 1 )
