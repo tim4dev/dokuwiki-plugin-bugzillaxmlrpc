@@ -150,7 +150,7 @@ class syntax_plugin_bugzillaxmlrpc extends DokuWiki_Syntax_Plugin {
     }
 
 
-    function handle($match, $state, $pos, &$handler) {
+    function handle($match, $state, $pos, Doku_Handler $handler) {
         preg_match('/^bugz#([0-9]+)/', $match, $submatch);
         $ids = $submatch[1];
         $data_bugs = array(); // two-dimensional array
@@ -191,7 +191,7 @@ class syntax_plugin_bugzillaxmlrpc extends DokuWiki_Syntax_Plugin {
     }
 
 
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if($mode == 'xhtml'){
             $data0 = $data[0];
             $html_bug_all = '<ul>' . "\n";
